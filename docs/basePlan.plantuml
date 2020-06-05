@@ -1,0 +1,26 @@
+@startuml UseCase Plan
+
+left to right direction
+skinparam packageStyle rectangle
+actor SystemInRuntime
+actor BugAnalyst
+actor User
+
+rectangle BugTracker {
+SystemInRuntime -- (Receive Log Error Infos)
+(Get Log Error Infos) -- BugAnalyst
+(Classify Bug) -- BugAnalyst
+(Communicate) -- BugAnalyst
+(Report New Bug)
+User -- (Communicate)
+(Classify Bug) .> (Record Log) :include
+(Receive Log Error Infos) .> (Record Log) :include
+(Communicate) .> (Report New Bug):include
+}
+note left of BugTracker
+The system should:
+Auto receive and record the log from the System in its runtime
+The communication should be directely between User and the BugAnalyst
+The BugAnalyst can Get Log Erros Infos and Classify Bugs
+end note
+@enduml
